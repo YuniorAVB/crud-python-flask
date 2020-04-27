@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    {%  with message = get_flashed_messages() %}
+    {% if message %}
+    <h1>{{message[0]}}</h1>
+    {% endif %}
+    {% endwith %}
+
+    <form action="/add/product" method="post">
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="price" placeholder="price">
+        <input type="text" name="stock" placeholder="stock">
+        <input type="submit" value="REGISTRAR">
+    </form>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>STOCK</th>
+                <th>OPTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pro in products %}
+            <tr>
+                <td>{{pro[0]}}</td>
+                <td>{{pro[1]}}</td>
+                <td>{{pro[2]}}</td>
+                <td><a href="/edit/product/{{pro[3]}}">EDITAR</a>
+                <a href="/delete/product/{{pro[3]}}">DELETE</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+</html>
